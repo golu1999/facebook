@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>HOME PAGE</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div id="header" style="background-color: blue;position: relative;height: 100px;">
+<p id="title" style="position: absolute;left: 160px;font-size: 50px;top: -30px;color: white;">facebook</p>
+<div id="email" style="position: absolute;right: 350px;top: 10px;color: white">
+Email<br>
+<input type="text" id="valid"/>
+</div>
+<div id="password" style="position: absolute;right: 100px;top: 10px;color: white;">
+Password<br>
+<input type="text" id="pass"/>
+<button id="validB">Log In</button>
+</div>
+
+<p id="check" style="position: absolute;right: 350px;top: 50px;"></p>
+
+
+</div>
+
+<p style="position: absolute;right: 250px;font-size: 40px;top: 80px;">Create a new account</p>
+<p style="position: absolute;left: 750px;top: 185px;">Email Address:</p>
+<p style="position: absolute;left: 750px;top: 235px;">Password:</p>
+<input type="text" id="signupEmail" style="position: absolute;left: 900px;top: 200px;"/><br><br>
+<input type="password" id="signupPass" style="position: absolute;left: 900px;top: 250px;"/>
+<button id="signupButton" style="position: absolute;left: 750px;top: 300px;">Sign Up</button> 
+<script type="text/javascript">
+var button = document.getElementById('validB');
+var text = document.getElementById("valid");
+ 
+
+button.onclick = function check(event){
+xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var result = JSON.parse(this.responseText);
+	  if(result.smtp_check == true){
+	  text.value = 'VALID';
+  }
+  else{
+  text.value = 'INVALID';
+}
+}  
+  };
+xhttp.open("GET","http://apilayer.net/api/check?access_key=bf4083dcebef31b71af306dadc365103&email="+text.value);
+xhttp.send();
+}
+
+</script>
+</body>
+</html>
